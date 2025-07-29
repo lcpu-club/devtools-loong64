@@ -4,7 +4,7 @@ _pkgver=1.4.0
 _patchver=1
 pkgname=devtools-loong64
 pkgver=${_pkgver}.patch${_patchver}
-pkgrel=1
+pkgrel=2
 pkgdesc='Tools for Arch Linux LoongArch package maintainers'
 arch=('loong64' 'x86_64' 'riscv64' 'aarch64')
 license=('GPL-3.0-or-later')
@@ -79,7 +79,8 @@ package() {
   for conf in rust.conf; do
     ln -s '../conf.d/'$conf "$pkgdir"/usr/share/devtools/makepkg.conf.d/loong64.conf.d/$conf
   done
-  patch /usr/share/devtools/makepkg.conf.d/conf.d/fortran.conf -i fortran-loong64.patch -o "$pkgdir"/usr/share/devtools/makepkg.conf.d/loong64.conf.d/fortran.conf
+  patch /usr/share/devtools/makepkg.conf.d/conf.d/fortran.conf -i fortran-loong64.patch -o fortran-loong64.conf
+  install -Dm644 fortran-loong64.conf "$pkgdir"/usr/share/devtools/makepkg.conf.d/loong64.conf.d/fortran.conf
 
   install -Dm755 "${srcdir}/get-loong64-pkg" -t "$pkgdir"/usr/bin/
   install -Dm755 "${srcdir}/export-loong64-patches" -t "$pkgdir"/usr/bin/
